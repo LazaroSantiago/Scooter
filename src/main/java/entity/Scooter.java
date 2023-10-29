@@ -1,18 +1,35 @@
 package entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Entity
 @Data
 public class Scooter {
     @Id
-    private Long id;
-    //ubicacion
-    //tiempo de uso
-    //kms totales
-    //get(tiempo uso con pausas)
-    //get(tiempo uso sin pausas)
-    private char status;
+    private long id;
+
+    @Column
+    private static long normalRate;
+
+    @Column
+    private static long extraRate;
+
+    @Column
+    private Timestamp activeTime;
+
+    @Column
+    private Timestamp offTime;
+
+    @Column
+    private long kilometres;
+
+    @Column
+    private boolean status;
+
+    @Column
+    private String ubicacion;
 }

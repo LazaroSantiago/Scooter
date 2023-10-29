@@ -1,23 +1,32 @@
 package entity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.sql.Timestamp;
+import java.time.LocalDate;
 
 @Entity
 @Data
 public class Trip {
-    @Id
-    private Long id;
 
-    //id_scooter
-    //id_usuario
+    @Id
+    private long id;
     @Column
-    private long kilometers;
-    //startTime
-    //endTime
-    //paradaInicio
-    //paradaFin
-    //horaInicio
-    //horaFin
+    private long idScooter;
+    @Column
+    private long idUser;
+    @Column
+    private long kilometres;
+    @Column
+    private LocalDate startTime;
+    @Column
+    private LocalDate endTime;
+    @Column
+    private long price;
+    @Column
+    private Timestamp offTime;
+
+    private long idStartStop;
+
+    private long idEndStop;
 }
