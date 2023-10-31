@@ -24,25 +24,17 @@ public interface ScooterRepository extends BaseRepository<Scooter, Long>{
     )
     void registerOutOfMaintenance(@Param("id") long id);
 
-//    Generar reporte de uso de monopatines por kilómetros
-    @Query(
-        "select s from Scooter s order by s.kilometres desc"
-    )
-    List<Scooter> reportPerKilometer();
-
 //    Generar reporte de uso de monopatines por tiempo con pausas
     @Query(
             "select s from Scooter s inner join Trip t on s.id = t.idScooter where t.offTime > :ceroTime order by t.offTime desc"
     )
-    List<Scooter> reportTimeWithStop(@Param("ceroTime") Timestamp ceroTime);
+    List<Scooter> reportWithStop(@Param("ceroTime") Timestamp ceroTime);
 
 //    Generar reporte de uso de monopatines por tiempo sin pausas
     @Query(
             "select s from Scooter s inner join Trip t on s.id = t.idScooter where t.offTime <= :ceroTime"
     )
-    List<Scooter> reportTimeWithNoStop(@Param("ceroTime") Timestamp ceroTime);
-
-//    ADMIN
+    List<Scooter> reportWithNoStop(@Param("ceroTime") Timestamp ceroTime);
 
 //    Como administrador quiero consultar la cantidad de monopatines actualmente en operación,
 //    versus la cantidad de monopatines actualmente en mantenimiento.
@@ -52,4 +44,12 @@ public interface ScooterRepository extends BaseRepository<Scooter, Long>{
     )
     List<ScooterDto> functionalScooter();
 
+//    Como usuario quiero lun listado de los monopatines cercanos a mi zona, para poder encontrar
+//    un monopatín cerca de mi ubicación
+    @Query(
+            "select s " +
+                    "from Scooter s " +
+                    " where s.location like :location "
+    )
+    List<Scooter> near(@Param("location") String location);
 }

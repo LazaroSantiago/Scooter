@@ -31,5 +31,5 @@ public class Scooter {
     private boolean status;
 
     @Column
-    private String ubicacion;
+    private String location;
 }

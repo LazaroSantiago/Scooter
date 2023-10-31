@@ -10,7 +10,9 @@ import repository.ScooterRepository;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -22,6 +24,9 @@ public class ScooterService implements BaseService<Scooter>{
     private static long ExtraRate = 0;
     @Autowired
     private ScooterRepository scooterRepository;
+
+    @Autowired
+    private TripService TripService;
 
     @Override
     @Transactional
@@ -74,19 +79,10 @@ public class ScooterService implements BaseService<Scooter>{
         }
     }
 
-    public List<ScooterDto> reportPerKilometer() throws Exception {
-        try {
-            var result = this.scooterRepository.reportPerKilometer();
-            return result.stream().map(Scooter -> new ScooterDto((int)(Scooter.getActiveTime().getTime()/1000), (int)(Scooter.getOffTime().getTime()/1000), Scooter.getKilometres(), Scooter.isStatus())).collect(Collectors.toList());
-        }catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
-    }
-
-    public List<ScooterDto> reportTimeStopYes() throws Exception {
+    public List<ScooterDto> reportStopYes() throws Exception {
         try {
             Timestamp ceroTime = new Timestamp(0);
-            var result = this.scooterRepository.reportTimeWithStop(ceroTime);
+            var result = this.scooterRepository.reportWithStop(ceroTime);
             return result.stream().map(Scooter -> new ScooterDto((int)(Scooter.getActiveTime().getTime()/1000),
                     (int)(Scooter.getOffTime().getTime()/1000),
                     Scooter.getKilometres(),
@@ -96,10 +92,10 @@ public class ScooterService implements BaseService<Scooter>{
         }
     }
 
-    public List<ScooterDto> reportTimeStopNo() throws Exception {
+    public List<ScooterDto> reportStopNo() throws Exception {
         try {
             Timestamp ceroTime = new Timestamp(0);
-            var result = this.scooterRepository.reportTimeWithNoStop(ceroTime);
+            var result = this.scooterRepository.reportWithNoStop(ceroTime);
             return result.stream().map(Scooter -> new ScooterDto((int)(Scooter.getActiveTime().getTime()/1000),
                     (int)(Scooter.getOffTime().getTime()/1000),
                     Scooter.getKilometres(),
@@ -109,11 +105,36 @@ public class ScooterService implements BaseService<Scooter>{
         }
     }
 
-//    ADMIN
+    public List<ScooterDto> reportXTrips(int lot, int year) throws Exception {
+        try {
+            List<ScooterDto> result = new ArrayList<>();
+            List<Long> var = this.TripService.reportXTrips(lot, year);
+            for (Long l: var) {
+                Scooter scooter = this.scooterRepository.findById(l).get();
+                result.add(new ScooterDto((int)(scooter.getActiveTime().getTime()/1000),
+                        scooter.getKilometres(),
+                        scooter.isStatus()));
+            }
+            return result;
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
 
     public List<ScooterDto> reportFunctionalScooter() throws Exception {
         try {
             return this.scooterRepository.functionalScooter();
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public List<ScooterDto> near(String location) throws Exception {
+        try {
+            var scoo = this.scooterRepository.near(location);
+            return scoo.stream().map(Scooter -> new ScooterDto(Scooter.getLocation(),
+                    Scooter.getKilometres(),
+                    Scooter.isStatus())).collect(Collectors.toList());
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }

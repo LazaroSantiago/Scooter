@@ -2,7 +2,6 @@ package controller;
 
 import entity.Scooter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +35,7 @@ public class ScooterController {
     }
 
 
-    @PutMapping("/InMaintenance/{id}")
+    @PutMapping("/inMaintenance/{id}")
     public ResponseEntity<?> registerInMaintenance(@PathVariable long id){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(scooterService.registerInMaintenance(id));
@@ -45,7 +44,7 @@ public class ScooterController {
         }
     }
 
-    @PutMapping("/OutMaintenance/{id}")
+    @PutMapping("/outMaintenance/{id}")
     public ResponseEntity<?> registerOutMaintenance(@PathVariable long id){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(scooterService.registerOutMaintenance(id));
@@ -54,40 +53,46 @@ public class ScooterController {
         }
     }
 
-    @GetMapping("/PerKilometer")
-    public ResponseEntity<?> reportPerKilometer(){
+    @GetMapping("/report/stopYes")
+    public ResponseEntity<?> reportStopYes(){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(scooterService.reportPerKilometer());
+            return ResponseEntity.status(HttpStatus.OK).body(scooterService.reportStopYes());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
         }
     }
 
-    @GetMapping("/StopYes")
-    public ResponseEntity<?> reportTimeStopYes(){
+    @GetMapping("/report/stopNo")
+    public ResponseEntity<?> reportStopNo(){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(scooterService.reportTimeStopYes());
+            return ResponseEntity.status(HttpStatus.OK).body(scooterService.reportStopNo());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
         }
     }
 
-    @GetMapping("/StopNo")
-    public ResponseEntity<?> reportTimeStopNo(){
+    @GetMapping("/report/activated")
+    public ResponseEntity<?> reportFunctionalScooter(){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(scooterService.reportTimeStopNo());
+            return ResponseEntity.status(HttpStatus.OK).body(scooterService.reportFunctionalScooter());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
         }
     }
 
-//    ADMIN
-
-//    http://tuaplicacion.com/api/productos?fechaLanzamiento=2023-11-01
-    @PutMapping("/NormalRate/{price}")
-    public ResponseEntity<?> setNormalRate(@PathVariable long price/*, @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)LocalDate fecha*/){
+    @GetMapping("/report/{lot}/{year}")
+    public ResponseEntity<?> reportXTrips(@PathVariable int lot, @PathVariable int year){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(scooterService.setNormalRate(price));
+            return ResponseEntity.status(HttpStatus.OK).body(scooterService.reportXTrips(lot, year));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+        }
+    }
+
+    @PutMapping("/normalRate/{price}")
+    public ResponseEntity<?> setNormalRate(@PathVariable long price){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(ScooterService.setNormalRate(price));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
         }
@@ -96,10 +101,11 @@ public class ScooterController {
     @PutMapping("/extraRate/{price}")
     public ResponseEntity<?> setExtraRate(@PathVariable long price){
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(scooterService.setextraRate(price));
+            return ResponseEntity.status(HttpStatus.OK).body(ScooterService.setextraRate(price));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
         }
     }
+
 
 }

@@ -31,4 +31,13 @@ public class TripController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
         }
     }
+
+    @GetMapping("/{month1}/{month2}/{year}")
+    public ResponseEntity<?> totalCharged(@PathVariable int month1, @PathVariable int month2, @PathVariable int year){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(this.tripService.totalCharged(month1, month2, year));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+        }
+    }
 }
