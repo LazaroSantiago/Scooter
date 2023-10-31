@@ -44,12 +44,5 @@ public interface ScooterRepository extends BaseRepository<Scooter, Long>{
     )
     List<ScooterDto> functionalScooter();
 
-//    Como usuario quiero lun listado de los monopatines cercanos a mi zona, para poder encontrar
-//    un monopatín cerca de mi ubicación
-    @Query(
-            "select s " +
-                    "from Scooter s " +
-                    " where s.location like :location "
-    )
-    List<Scooter> near(@Param("location") String location);
+
 }

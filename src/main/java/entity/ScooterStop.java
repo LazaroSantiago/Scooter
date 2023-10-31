@@ -10,10 +10,14 @@ import java.util.Set;
 @Data
 public class ScooterStop {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column
+    private String location;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY ,mappedBy = "stop", cascade = CascadeType.ALL)
     private Set<Scooter> scooter;
+
 
     //coordenada
 }

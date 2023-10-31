@@ -129,17 +129,6 @@ public class ScooterService implements BaseService<Scooter>{
         }
     }
 
-    public List<ScooterDto> near(String location) throws Exception {
-        try {
-            var scoo = this.scooterRepository.near(location);
-            return scoo.stream().map(Scooter -> new ScooterDto(Scooter.getLocation(),
-                    Scooter.getKilometres(),
-                    Scooter.isStatus())).collect(Collectors.toList());
-        }catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
-    }
-
 //    Como administrador quiero hacer un ajuste de precios, y que a partir de cierta fecha el sistema
 //    habilite los nuevos precios.
     public static boolean setNormalRate(long NormalRat){

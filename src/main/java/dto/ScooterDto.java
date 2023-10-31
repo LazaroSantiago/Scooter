@@ -1,10 +1,5 @@
 package dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
-
-import java.time.LocalDate;
-
 public class ScooterDto {
 
     private int activeTime;

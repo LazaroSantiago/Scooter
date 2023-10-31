@@ -9,9 +9,12 @@ import java.time.LocalDate;
 @Data
 public class Receipt {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id ;
     @Column
     private long idScooter;
+    @Column
+    private long idUser;
     @Column
     private LocalDate startTime;
     @Column

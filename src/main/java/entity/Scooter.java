@@ -10,6 +10,7 @@ import java.time.LocalDate;
 @Data
 public class Scooter {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column
@@ -32,4 +33,8 @@ public class Scooter {
 
     @Column
     private String location;
+
+    @ManyToOne
+    @JoinColumn(name = "scooter")
+    private ScooterStop stop;
 }
