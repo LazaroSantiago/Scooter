@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
 
 @Entity
 @Data
@@ -34,7 +33,7 @@ public class Scooter {
     @Column
     private String location;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "scooter")
     private ScooterStop stop;
 }

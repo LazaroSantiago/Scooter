@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import service.ScooterStopService;
 
 @RestController
-@RequestMapping("ScooterStop")
+@RequestMapping("/ScooterStop")
 public class ScooterStopController {
 
     @Autowired
