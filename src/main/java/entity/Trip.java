@@ -17,6 +17,8 @@ public class Trip {
     @Column
     private long idUser;
     @Column
+    private long idStartStop;
+    @Column
     private long kilometres;
     @Column
     private LocalDate startTime;
@@ -26,8 +28,6 @@ public class Trip {
     private long price;
     @Column
     private Timestamp offTime;
-
-    private long idStartStop;
-
+    @Column
     private long idEndStop;
 }

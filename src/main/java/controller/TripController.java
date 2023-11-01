@@ -40,4 +40,14 @@ public class TripController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
         }
     }
+
+    @PutMapping("/{id}/{price}")
+    public ResponseEntity<?> setPrice (@PathVariable int id, @PathVariable int price){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(this.tripService.setPrice(id, price));
+        }catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+        }
+    }
+
 }

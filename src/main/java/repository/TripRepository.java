@@ -31,4 +31,10 @@ public interface TripRepository extends BaseRepository<Trip, Long>{
                     " where :year = extract(year from t.startTime) and extract(month from t.startTime) between :month1 and :month2"
     )
     Long totalCharged(@Param("month1") int month1, @Param("month2") int month2, @Param("year") int year);
+
+    @Query(
+            "UPDATE Trip t set t.price = :price where t.id = :id"
+    )
+    List<Long> setPrice(@Param("id") long id, @Param("price") long price);
+
 }

@@ -55,4 +55,20 @@ public class TripService implements BaseService<Trip>{
             throw new Exception(e.getMessage());
         }
     }
+
+    public boolean setPrice(long id, long price) throws Exception {
+        try {
+            if (this.tripRepository.existsById(id)){
+                this.tripRepository.setPrice(id, price);
+                return true;
+            } else {
+                throw new Exception();
+            }
+
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+
 }
