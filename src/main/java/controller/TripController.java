@@ -24,7 +24,7 @@ public class TripController {
     }
 
     @DeleteMapping("")
-    public ResponseEntity<?> dalete(@RequestBody long id){
+    public ResponseEntity<?> delete(@RequestBody long id){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(this.tripService.delete(id));
         }catch (Exception e){
