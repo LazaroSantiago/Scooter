@@ -36,4 +36,12 @@ public class Scooter {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "scooter")
     private ScooterStop stop;
+
+    public static void setNormalRate(long normalRate){
+        Scooter.normalRate = normalRate;
+    }
+
+    public static void setExtraRate(long extraRate){
+        Scooter.extraRate = extraRate;
+    }
 }

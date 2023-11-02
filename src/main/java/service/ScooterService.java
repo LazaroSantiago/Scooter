@@ -8,20 +8,13 @@ import org.springframework.stereotype.Service;
 import repository.ScooterRepository;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Service("ScooterService")
 public class ScooterService implements BaseService<Scooter>{
-    private static long NormalRate = 0;
-    private static long ExtraRate = 0;
+
     @Autowired
     private ScooterRepository scooterRepository;
 
@@ -131,40 +124,13 @@ public class ScooterService implements BaseService<Scooter>{
 
 //    Como administrador quiero hacer un ajuste de precios, y que a partir de cierta fecha el sistema
 //    habilite los nuevos precios.
-    public static boolean setNormalRate(long NormalRat){
-        NormalRate = NormalRat;
+    public static boolean setNormalRate(long normalRate){
+        Scooter.setNormalRate(normalRate) ;
         return true;
     }
 
-    public static boolean setextraRate(long extraRat){
-        ExtraRate = extraRat;
+    public static boolean setextraRate(long extraRate){
+        Scooter.setExtraRate(extraRate);
         return true;
     }
-
-//    public static boolean setNormalRate(long NormalRat, long ExtraRate, LocalDate date){
-//        try {
-//            ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-//            long now = System.currentTimeMillis();
-//            long tiempoHastaFechaDeseada = date.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli();
-//            long totalTime = tiempoHastaFechaDeseada - now;
-//            scheduler.schedule(new Rate(NormalRat, ExtraRate), totalTime, TimeUnit.MILLISECONDS);
-//            NormalRate = NormalRat;
-//        }
-//
-//        return true;
-//    }
-//
-//    static class Rate implements Runnable {
-//        private static long normalRate;
-//        private static long extraRate;
-//        public Rate (long normalRat, long extraRat){
-//            normalRate = normalRat;
-//            extraRate = extraRat;
-//        }
-//        @Override
-//        public void run() {
-//            NormalRate = normalRate;
-//            ExtraRate = extraRate;
-//        }
-//    }
 }
