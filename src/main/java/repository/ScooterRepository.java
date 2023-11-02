@@ -35,20 +35,20 @@ public interface ScooterRepository extends BaseRepository<Scooter, Long>{
             "select s from Scooter s inner join Trip t on s.id = t.idScooter where UNIX_TIMESTAMP(t.offTime) > 0 order by t.offTime desc"
     )
     List<Scooter> reportWithStop();
-//
-////    Generar reporte de uso de monopatines por tiempo sin pausas
+
+//    Generar reporte de uso de monopatines por tiempo sin pausas
     @Query(
-            "select s from Scooter s inner join Trip t on s.id = t.idScooter where UNIX_TIMESTAMP(t.offTime)  <= 0"
+            "select s from Scooter s inner join Trip t on s.id = t.idScooter where UNIX_TIMESTAMP(t.offTime) = 0"
     )
     List<Scooter> reportWithNoStop();
 //
 ////    Como administrador quiero consultar la cantidad de monopatines actualmente en operación,
 ////    versus la cantidad de monopatines actualmente en mantenimiento.
-//    @Query(
-//            "select new dto.ScooterDto(SUM(CASE WHEN s.status = true THEN 1 ELSE 0 END),  SUM(CASE WHEN s.status = false THEN 1 ELSE 0 END)) " +
-//                    "from Scooter s"
-//    )
-//    List<ScooterDto> functionalScooter();
+    @Query(
+            "select new dto.ScooterDto(SUM(CASE WHEN s.status = true THEN 1 ELSE 0 END),  SUM(CASE WHEN s.status = false THEN 1 ELSE 0 END)) " +
+                    "from Scooter s"
+    )
+    List<ScooterDto> functionalScooter();
 
 
 }

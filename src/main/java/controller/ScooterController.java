@@ -79,16 +79,16 @@ public class ScooterController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
         }
     }
-//
-//    @GetMapping("/report/activated")
-//    public ResponseEntity<?> reportFunctionalScooter(){
-//        try {
-//            return ResponseEntity.status(HttpStatus.OK).body(scooterService.reportFunctionalScooter());
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
-//        }
-//    }
-//
+
+    @GetMapping("/report/activated")
+    public ResponseEntity<?> reportFunctionalScooter(){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(scooterService.reportFunctionalScooter());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+        }
+    }
+
 //    @GetMapping("/report/{lot}/{year}")
 //    public ResponseEntity<?> reportXTrips(@PathVariable int lot, @PathVariable int year){
 //        try {

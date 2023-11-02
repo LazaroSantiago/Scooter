@@ -1,6 +1,11 @@
 package dto;
 
-public class ScooterStopDto {
+import lombok.Data;
+
+import java.io.Serializable;
+
+@Data
+public class ScooterStopDto implements Serializable {
 
     private String location;
 

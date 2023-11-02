@@ -1,10 +1,16 @@
 package dto;
 
-public class ScooterDto {
+import lombok.Data;
 
-    private int activeTime;
+import java.io.Serializable;
+import java.sql.Timestamp;
 
-    private int offTime;
+@Data
+public class ScooterDto implements Serializable {
+
+    private Timestamp activeTime;
+
+    private Timestamp offTime;
 
     private long kilometres;
 
@@ -15,13 +21,13 @@ public class ScooterDto {
     private long activeScooters;
     private long nonActiveScooters;
 
-    public ScooterDto (int activeTime, long kilometres, boolean status){
+    public ScooterDto (Timestamp activeTime, long kilometres, boolean status){
         this.activeTime = activeTime;
         this.kilometres = kilometres;
         this.status = status;
     }
 
-    public ScooterDto (int activeTime, int offTime, long kilometres, boolean status){
+    public ScooterDto (Timestamp activeTime, Timestamp offTime, long kilometres, boolean status){
         this.activeTime = activeTime;
         this.kilometres = kilometres;
         this.offTime = offTime;

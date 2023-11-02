@@ -2,10 +2,11 @@ package dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Data
-public class TripDto {
+public class TripDto implements Serializable {
 
     private long idScooter;
 
