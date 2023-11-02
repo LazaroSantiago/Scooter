@@ -3,14 +3,11 @@ package util;
 import controller.ScooterController;
 import controller.ScooterStopController;
 import controller.TripController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import entity.Scooter;
 import entity.ScooterStop;
 import entity.Trip;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import java.sql.Timestamp;
-import java.time.LocalDate;
 
 @Component
 public class Test {
