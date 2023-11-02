@@ -1,12 +1,15 @@
 package service;
 
 import dto.ScooterStopDto;
+import entity.Scooter;
 import entity.ScooterStop;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.ScooterStopRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service("ScooterStopService")
 public class ScooterStopService implements BaseService<ScooterStop>{
@@ -32,17 +35,28 @@ public class ScooterStopService implements BaseService<ScooterStop>{
     @Override
     public ScooterStop save(ScooterStop entity) throws Exception {
         try {
-            return this.save(entity);
+            return this.SStopRepository.save(entity);
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
     }
 
-    public List<ScooterStopDto> near(String location) throws Exception {
-        try {
-            return this.SStopRepository.near(location);
+    @Override
+    @Transactional
+    public ScooterStop findById(Long id) throws Exception {
+        try{
+            Optional<ScooterStop> result = SStopRepository.findById(id);
+            return result.get();
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
     }
+
+//    public List<ScooterStopDto> near(String location) throws Exception {
+//        try {
+//            return this.SStopRepository.near(location);
+//        }catch (Exception e){
+//            throw new Exception(e.getMessage());
+//        }
+//    }
 }

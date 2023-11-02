@@ -21,13 +21,33 @@ public class Trip {
     @Column
     private long kilometres;
     @Column
-    private LocalDate startTime;
+    private Timestamp startTime;
     @Column
-    private LocalDate endTime;
+    private Timestamp endTime;
     @Column
     private long price;
     @Column
     private Timestamp offTime;
     @Column
     private long idEndStop;
+
+    public Trip(long id,long idScooter,
+                long idUser,long idStartStop,
+                long kilometres,long price,
+                long idEndStop, Timestamp offTime,
+                Timestamp startTime, Timestamp endTime){
+        this.id=id;
+        this.endTime=endTime;
+        this.idEndStop=idEndStop;
+        this.kilometres=kilometres;
+        this.startTime=startTime;
+        this.idStartStop=idStartStop;
+        this.idUser=idUser;
+        this.idScooter=idScooter;
+        this.price=price;this.offTime = offTime;
+    }
+
+    public Trip() {
+
+    }
 }
