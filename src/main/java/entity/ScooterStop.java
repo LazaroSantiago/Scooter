@@ -1,6 +1,7 @@
 package entity;
 
 import jakarta.persistence.*;
+import jdk.jfr.Name;
 import lombok.Data;
 
 import java.util.Set;
@@ -10,11 +11,20 @@ import java.util.Set;
 public class ScooterStop {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Name("stop_id")
+    private Long stop_id;
     @Column
     private String location;
 
     @OneToMany(fetch = FetchType.LAZY ,mappedBy = "stop", cascade = CascadeType.ALL)
     private Set<Scooter> scooter;
 
+    public ScooterStop(Long stop_id, String location){
+        this.stop_id=stop_id;
+        this.location=location;
+    }
+
+    public ScooterStop() {
+
+    }
 }

@@ -9,21 +9,22 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import util.Test;
 
+
 @SpringBootApplication
-@ComponentScan({"util", "controller", "entity", "repository", "service", "dto"})
+@ComponentScan({"util", "controller", "entity", "repository", "service"})
 @EnableJpaRepositories("repository")
 @EntityScan("entity")
 public class ScooterApplication {
-    @Autowired
-    private Test test;
 
     public static void main(String[] args) {
         SpringApplication.run(ScooterApplication.class, args);
     }
 
+    @Autowired
+    private Test test;
+
     @PostConstruct
-    public void initialize() {
-        //La logica de la aplicacion ocurre aca:
-        test.test();
+    public void init() {
+        test.testScooter();
     }
 }

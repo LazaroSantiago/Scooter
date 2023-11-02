@@ -46,7 +46,18 @@ public class ScooterService implements BaseService<Scooter>{
         }
     }
 
-    public boolean registerInMaintenance(long id) throws Exception {
+    @Override
+    @Transactional
+    public Scooter findById(Long id) throws Exception {
+        try{
+            Optional<Scooter> result = scooterRepository.findById(id);
+            return result.get();
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public boolean registerInMaintenance(Long id) throws Exception {
         try {
             if (this.scooterRepository.existsById(id)){
                 this.scooterRepository.registerInMaintenance(id);
@@ -58,8 +69,8 @@ public class ScooterService implements BaseService<Scooter>{
             throw new Exception(e.getMessage());
         }
     }
-
-    public boolean registerOutMaintenance(long id) throws Exception {
+//
+    public boolean registerOutMaintenance(Long id) throws Exception {
         try {
             if (this.scooterRepository.existsById(id)){
                 this.scooterRepository.registerOutOfMaintenance(id);
@@ -71,11 +82,11 @@ public class ScooterService implements BaseService<Scooter>{
             throw new Exception(e.getMessage());
         }
     }
-
+//
     public List<ScooterDto> reportStopYes() throws Exception {
         try {
-            Timestamp ceroTime = new Timestamp(0);
-            var result = this.scooterRepository.reportWithStop(ceroTime);
+            Timestamp ceroTime = Timestamp.valueOf("2023-11-01 21:00:00");
+            var result = this.scooterRepository.reportWithStop();
             return result.stream().map(Scooter -> new ScooterDto((int)(Scooter.getActiveTime().getTime()/1000),
                     (int)(Scooter.getOffTime().getTime()/1000),
                     Scooter.getKilometres(),
@@ -84,11 +95,11 @@ public class ScooterService implements BaseService<Scooter>{
             throw new Exception(e.getMessage());
         }
     }
-
+//
     public List<ScooterDto> reportStopNo() throws Exception {
         try {
-            Timestamp ceroTime = new Timestamp(0);
-            var result = this.scooterRepository.reportWithNoStop(ceroTime);
+            Timestamp ceroTime = Timestamp.valueOf("2023-11-01 21:00:00");
+            var result = this.scooterRepository.reportWithNoStop();
             return result.stream().map(Scooter -> new ScooterDto((int)(Scooter.getActiveTime().getTime()/1000),
                     (int)(Scooter.getOffTime().getTime()/1000),
                     Scooter.getKilometres(),
@@ -97,30 +108,30 @@ public class ScooterService implements BaseService<Scooter>{
             throw new Exception(e.getMessage());
         }
     }
-
-    public List<ScooterDto> reportXTrips(int lot, int year) throws Exception {
-        try {
-            List<ScooterDto> result = new ArrayList<>();
-            List<Long> var = this.TripService.reportXTrips(lot, year);
-            for (Long l: var) {
-                Scooter scooter = this.scooterRepository.findById(l).get();
-                result.add(new ScooterDto((int)(scooter.getActiveTime().getTime()/1000),
-                        scooter.getKilometres(),
-                        scooter.isStatus()));
-            }
-            return result;
-        }catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
-    }
-
-    public List<ScooterDto> reportFunctionalScooter() throws Exception {
-        try {
-            return this.scooterRepository.functionalScooter();
-        }catch (Exception e){
-            throw new Exception(e.getMessage());
-        }
-    }
+//
+//    public List<ScooterDto> reportXTrips(int lot, int year) throws Exception {
+//        try {
+//            List<ScooterDto> result = new ArrayList<>();
+//            List<Long> var = this.TripService.reportXTrips(lot, year);
+//            for (Long l: var) {
+//                Scooter scooter = this.scooterRepository.findById(l).get();
+//                result.add(new ScooterDto((int)(scooter.getActiveTime().getTime()/1000),
+//                        scooter.getKilometres(),
+//                        scooter.isStatus()));
+//            }
+//            return result;
+//        }catch (Exception e){
+//            throw new Exception(e.getMessage());
+//        }
+//    }
+//
+//    public List<ScooterDto> reportFunctionalScooter() throws Exception {
+//        try {
+//            return this.scooterRepository.functionalScooter();
+//        }catch (Exception e){
+//            throw new Exception(e.getMessage());
+//        }
+//    }
 
 //    Como administrador quiero hacer un ajuste de precios, y que a partir de cierta fecha el sistema
 //    habilite los nuevos precios.
