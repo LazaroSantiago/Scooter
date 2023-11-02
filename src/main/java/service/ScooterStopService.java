@@ -51,12 +51,4 @@ public class ScooterStopService implements BaseService<ScooterStop>{
             throw new Exception(e.getMessage());
         }
     }
-
-//    public List<ScooterStopDto> near(String location) throws Exception {
-//        try {
-//            return this.SStopRepository.near(location);
-//        }catch (Exception e){
-//            throw new Exception(e.getMessage());
-//        }
-//    }
 }

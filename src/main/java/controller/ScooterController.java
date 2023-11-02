@@ -61,7 +61,7 @@ public class ScooterController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
         }
     }
-//
+
     @GetMapping("/report/stopYes")
     public ResponseEntity<?> reportStopYes(){
         try {
@@ -70,7 +70,7 @@ public class ScooterController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
         }
     }
-//
+
     @GetMapping("/report/stopNo")
     public ResponseEntity<?> reportStopNo(){
         try {
@@ -89,32 +89,60 @@ public class ScooterController {
         }
     }
 
-//    @GetMapping("/report/{lot}/{year}")
-//    public ResponseEntity<?> reportXTrips(@PathVariable int lot, @PathVariable int year){
-//        try {
-//            return ResponseEntity.status(HttpStatus.OK).body(scooterService.reportXTrips(lot, year));
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
-//        }
-//    }
-//
-//    @PutMapping("/normalRate/{price}")
-//    public ResponseEntity<?> setNormalRate(@PathVariable long price){
-//        try {
-//            return ResponseEntity.status(HttpStatus.OK).body(ScooterService.setNormalRate(price));
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
-//        }
-//    }
-//
-//    @PutMapping("/extraRate/{price}")
-//    public ResponseEntity<?> setExtraRate(@PathVariable long price){
-//        try {
-//            return ResponseEntity.status(HttpStatus.OK).body(ScooterService.setextraRate(price));
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
-//        }
-//    }
+    @GetMapping("/report/{lot}/{year}")
+    public ResponseEntity<?> reportXTrips(@PathVariable int lot, @PathVariable int year){
+        try {
+            System.out.println(lot);
+            System.out.println(year);
+            return ResponseEntity.status(HttpStatus.OK).body(scooterService.reportXTrips(lot, year));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+        }
+    }
 
+    @GetMapping("/location/{location}")
+    public ResponseEntity<?> near(@PathVariable String location){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(this.scooterService.near(location));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+        }
+    }
+
+    @PutMapping("/normalRate/{price}")
+    public ResponseEntity<?> setNormalRate(@PathVariable long price){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(ScooterService.setNormalRate(price));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+        }
+    }
+
+    @PutMapping("/extraRate/{price}")
+    public ResponseEntity<?> setExtraRate(@PathVariable long price){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(ScooterService.setextraRate(price));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+        }
+    }
+
+    @GetMapping("/normalRate/")
+    public ResponseEntity<?> setNormalRate(){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(ScooterService.getNormalRate());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+        }
+    }
+
+    @GetMapping("/extraRate/")
+    public ResponseEntity<?> setExtraRate(){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(ScooterService.getextraRate());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+        }
+    }
 
 }

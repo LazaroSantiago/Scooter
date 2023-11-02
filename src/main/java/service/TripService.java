@@ -52,36 +52,26 @@ public class TripService implements BaseService<Trip>{
         }
     }
 
-//    public List<Long> reportXTrips(int lot, int year) throws Exception {
-//        try {
-//            List<Long> result = this.tripRepository.reportXTrips(lot, year);
-//            return result;
-//        }catch (Exception e){
-//            throw new Exception(e.getMessage());
-//        }
-//    }
-//
-//    public long totalCharged(int month1, int month2, int year) throws Exception {
-//        try {
-//            return this.tripRepository.totalCharged(month1,month2,year);
-//        }catch (Exception e){
-//            throw new Exception(e.getMessage());
-//        }
-//    }
-//
-//    public boolean setPrice(long id, long price) throws Exception {
-//        try {
-//            if (this.tripRepository.existsById(id)){
-//                this.tripRepository.setPrice(id, price);
-//                return true;
-//            } else {
-//                throw new Exception();
-//            }
-//
-//        }catch (Exception e){
-//            throw new Exception(e.getMessage());
-//        }
-//    }
+    public long totalCharged(int month1, int month2, int year) throws Exception {
+        try {
+            return this.tripRepository.totalCharged(month1,month2,year);
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public boolean setPrice(long id, long price) throws Exception {
+        try {
+            if (this.tripRepository.existsById(id)){
+                this.tripRepository.setPrice(price, id);
+                return true;
+            } else {
+                throw new Exception();
+            }
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
 
 
 }

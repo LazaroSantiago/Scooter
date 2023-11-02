@@ -51,6 +51,13 @@ public class Scooter {
     public static void setExtraRate(long extraRate){
         Scooter.extraRate = extraRate;
     }
+    public static long getNormalRate(){
+        return normalRate;
+    }
+
+    public static long getExtraRate(){
+        return extraRate;
+    }
 
     public Scooter(long id, Timestamp activeTime,
                    Timestamp offTime, long kilometres,

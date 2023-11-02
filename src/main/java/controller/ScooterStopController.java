@@ -31,13 +31,4 @@ public class ScooterStopController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
         }
     }
-
-//    @GetMapping("{location}")
-//    public ResponseEntity<?> reportStopYes(@PathVariable String location){
-//        try {
-//            return ResponseEntity.status(HttpStatus.OK).body(SStopService.near(location));
-//        } catch (Exception e) {
-//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
-//        }
-//    }
 }

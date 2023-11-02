@@ -17,7 +17,7 @@ public class Test {
     private final TripController TripController;
 
     @Autowired
-    public Test(ScooterController ScooterController, controller.ScooterStopController scooterStopController, controller.TripController tripController) {
+    public Test(ScooterController ScooterController, ScooterStopController scooterStopController, TripController tripController) {
         this.ScooterController = ScooterController;
         this.ScooterStopController = scooterStopController;
         this.TripController = tripController;

@@ -1,6 +1,7 @@
 package service;
 
 import dto.ScooterDto;
+import dto.ScooterStopDto;
 import entity.Scooter;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +71,7 @@ public class ScooterService implements BaseService<Scooter>{
             throw new Exception(e.getMessage());
         }
     }
-//
+
     public boolean registerOutMaintenance(Long id) throws Exception {
         try {
             if (this.scooterRepository.existsById(id)){
@@ -83,7 +84,7 @@ public class ScooterService implements BaseService<Scooter>{
             throw new Exception(e.getMessage());
         }
     }
-//
+
     public List<ScooterDto> reportStopYes() throws Exception {
         try {
             var result = this.scooterRepository.reportWithStop();
@@ -112,15 +113,24 @@ public class ScooterService implements BaseService<Scooter>{
 
     public List<ScooterDto> reportXTrips(int lot, int year) throws Exception {
         try {
-            List<ScooterDto> result = new ArrayList<>();
-            List<Long> var = this.TripService.reportXTrips(lot, year);
-            for (Long l: var) {
-                Scooter scooter = this.scooterRepository.findById(l).get();
-                result.add(new ScooterDto(scooter.getActiveTime(),
-                        scooter.getKilometres(),
-                        scooter.isStatus()));
-            }
-            return result;
+            var result = this.scooterRepository.reportXTrips(lot, year);
+            return result.stream().map(Scooter -> new ScooterDto(
+                    Scooter.getActiveTime(),
+                    Scooter.getOffTime(),
+                    Scooter.getKilometres(),
+                    Scooter.isStatus())).collect(Collectors.toList());
+        }catch (Exception e){
+            throw new Exception(e.getMessage());
+        }
+    }
+
+    public List<ScooterDto> near(String location) throws Exception {
+        try {
+            var result = this.scooterRepository.near(location);
+            return result.stream().map(Scooter -> new ScooterDto(
+                    Scooter.getLocation(),
+                    Scooter.getKilometres(),
+                    Scooter.isStatus())).collect(Collectors.toList());
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
@@ -144,5 +154,13 @@ public class ScooterService implements BaseService<Scooter>{
     public static boolean setextraRate(long extraRate){
         Scooter.setExtraRate(extraRate);
         return true;
+    }
+
+    public static Long getNormalRate(){
+        return Scooter.getNormalRate();
+    }
+
+    public static Long getextraRate(){
+        return Scooter.getExtraRate();
     }
 }
