@@ -20,9 +20,6 @@ public class ScooterService implements BaseService<Scooter>{
     @Autowired
     private ScooterRepository scooterRepository;
 
-    @Autowired
-    private TripService TripService;
-
     @Override
     @Transactional
     public boolean delete(Long id) throws Exception {
