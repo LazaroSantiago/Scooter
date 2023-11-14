@@ -4,11 +4,13 @@ import entity.Scooter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import service.ScooterService;
 
 import java.time.LocalDate;
 
+@Controller
 @RestController
 @RequestMapping("/scooter")
 public class ScooterController {
@@ -25,10 +27,19 @@ public class ScooterController {
         }
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable long id) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(scooterService.delete(id));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
+        }
+    }
+
+    @GetMapping("")
+    public ResponseEntity<?> findAll() {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(scooterService.findAll());
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
         }

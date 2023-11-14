@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 @Name("scooter")
 public class Scooter {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column

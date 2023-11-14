@@ -1,6 +1,7 @@
 package service;
 
 import entity.Scooter;
+import entity.ScooterStop;
 import entity.Trip;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,11 @@ public class TripService implements BaseService<Trip>{
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
+    }
+
+    @Override
+    public List<Trip> findAll() {
+        return tripRepository.findAll();
     }
 
     public long totalCharged(int month1, int month2, int year) throws Exception {

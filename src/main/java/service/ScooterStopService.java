@@ -51,4 +51,9 @@ public class ScooterStopService implements BaseService<ScooterStop>{
             throw new Exception(e.getMessage());
         }
     }
+
+    @Override
+    public List<ScooterStop> findAll() {
+        return SStopRepository.findAll();
+    }
 }

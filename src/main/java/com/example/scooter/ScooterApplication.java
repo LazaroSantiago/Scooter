@@ -11,7 +11,7 @@ import util.Test;
 
 
 @SpringBootApplication
-@ComponentScan({"util", "controller", "entity", "repository", "service"})
+@ComponentScan({"util", "controller", "entity", "repository", "service", "com.example.scooter"})
 @EnableJpaRepositories("repository")
 @EntityScan("entity")
 public class ScooterApplication {

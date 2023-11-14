@@ -56,6 +56,11 @@ public class ScooterService implements BaseService<Scooter>{
         }
     }
 
+    @Override
+    public List<Scooter> findAll() {
+        return scooterRepository.findAll();
+    }
+
     public boolean registerInMaintenance(Long id) throws Exception {
         try {
             if (this.scooterRepository.existsById(id)){
