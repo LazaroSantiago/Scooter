@@ -30,7 +30,7 @@ class ScooterTests {
     public final HttpClient client =  HttpClientBuilder.create().build();
 
     private final String BASE_URL = "http://localhost:8082/scooter";
-    private final int id = 1;
+    private final int id = 50;
 
     @Test
     @Priority(1)
@@ -43,9 +43,6 @@ class ScooterTests {
                 "  \"id\": "+ id +",\n" +
                 "  \"normalRate\": 100,\n" +
                 "  \"extraRate\": 150,\n" +
-                "  \"activeTime\": \"2023-01-01T12:00:00Z\",\n" +
-                "  \"offTime\": \"2023-01-01T15:00:00Z\",\n" +
-                "  \"kilometres\": 50,\n" +
                 "  \"status\": true,\n" +
                 "  \"location\": \"Latitude: 40.7128, Longitude: -74.0060\"\n" +
                 "}";

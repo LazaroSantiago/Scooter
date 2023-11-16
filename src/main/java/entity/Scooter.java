@@ -1,5 +1,6 @@
 package entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jdk.jfr.Name;
 import lombok.Data;
@@ -16,32 +17,18 @@ public class Scooter {
 
     @Column
     private static long normalRate;
-
     @Column
     private static long extraRate;
-
-    @Column
-    @Name("activeTime")
-    private Timestamp activeTime;
-
-    @Column
-    @Name("offTime")
-    private Timestamp offTime;
-
-    @Column
-    @Name("kilometres")
-    private long kilometres;
-
     @Column
     @Name("status")
     private boolean status;
-
     @Column
     @Name("location")
     private String location;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "stop_id")
+    @JoinColumn
+    @JsonBackReference
     private ScooterStop stop;
 
     public static void setNormalRate(long normalRate){
@@ -59,18 +46,18 @@ public class Scooter {
         return extraRate;
     }
 
-    public Scooter(long id, Timestamp activeTime,
-                   Timestamp offTime, long kilometres,
-                   boolean status,String location){
+    public Scooter(long id, boolean status,String location){
         this.id=id;
-        this.offTime= offTime;
         this.location= location;
-        this.kilometres=kilometres;
-        this.activeTime=activeTime;
         this.status=status;
     }
 
-    public Scooter() {
-
+    public Scooter(long id, boolean status,String location, ScooterStop stop){
+        this.id=id;
+        this.location= location;
+        this.status=status;
+        this.stop=stop;
     }
+
+    public Scooter() {}
 }

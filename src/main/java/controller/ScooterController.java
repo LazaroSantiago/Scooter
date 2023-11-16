@@ -1,6 +1,7 @@
 package controller;
 
 import entity.Scooter;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ public class ScooterController {
     private ScooterService scooterService;
 
     @PostMapping("")
+    @Operation(summary = "Crea un nuevo scooter")
     public ResponseEntity<?> save(@RequestBody Scooter entity) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(scooterService.save(entity));
@@ -28,6 +30,7 @@ public class ScooterController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Elimina un scooter por id")
     public ResponseEntity<?> delete(@PathVariable long id) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(scooterService.delete(id));
@@ -37,6 +40,7 @@ public class ScooterController {
     }
 
     @GetMapping("")
+    @Operation(summary = "Obtener todos los scooters")
     public ResponseEntity<?> findAll() {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(scooterService.findAll());
@@ -46,6 +50,7 @@ public class ScooterController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Obtener un scooter por id")
     public ResponseEntity<?> findById(@PathVariable Long id) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(scooterService.findById(id));
@@ -56,6 +61,7 @@ public class ScooterController {
 
 
     @PutMapping("/inMaintenance/{id}")
+    @Operation(summary = "Registrar un scooter en mantenimiento por id")
     public ResponseEntity<?> registerInMaintenance(@PathVariable long id){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(scooterService.registerInMaintenance(id));
@@ -65,6 +71,7 @@ public class ScooterController {
     }
 
     @PutMapping("/outMaintenance/{id}")
+    @Operation(summary = "Registrar un scooter fuera de mantenimiento por id")
     public ResponseEntity<?> registerOutMaintenance(@PathVariable long id){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(scooterService.registerOutMaintenance(id));
@@ -74,15 +81,18 @@ public class ScooterController {
     }
 
     @GetMapping("/report/stopYes")
+    @Operation(summary = "Obtener un scooter con parada durante algun viaje")
     public ResponseEntity<?> reportStopYes(){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(scooterService.reportStopYes());
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
         }
     }
 
     @GetMapping("/report/stopNo")
+    @Operation(summary = "Obtener un scooter sin parada durante algun viaje")
     public ResponseEntity<?> reportStopNo(){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(scooterService.reportStopNo());
@@ -92,6 +102,7 @@ public class ScooterController {
     }
 
     @GetMapping("/report/activated")
+    @Operation(summary = "Obtener reporte de scooters activos y no activos")
     public ResponseEntity<?> reportFunctionalScooter(){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(scooterService.reportFunctionalScooter());
@@ -101,6 +112,7 @@ public class ScooterController {
     }
 
     @GetMapping("/report/{lot}/{year}")
+    @Operation(summary = "Obtener reporte de scooters con mas de X viajes en un año")
     public ResponseEntity<?> reportXTrips(@PathVariable int lot, @PathVariable int year){
         try {
             System.out.println(lot);
@@ -112,6 +124,7 @@ public class ScooterController {
     }
 
     @GetMapping("/location/{location}")
+    @Operation(summary = "Obtener scooters cercanos")
     public ResponseEntity<?> near(@PathVariable String location){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(this.scooterService.near(location));
@@ -121,6 +134,7 @@ public class ScooterController {
     }
 
     @PutMapping("/normalRate/{price}")
+    @Operation(summary = "Setea el precio normal del scooter")
     public ResponseEntity<?> setNormalRate(@PathVariable long price){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(ScooterService.setNormalRate(price));
@@ -130,6 +144,7 @@ public class ScooterController {
     }
 
     @PutMapping("/extraRate/{price}")
+    @Operation(summary = "Setea el precio extra del scooter ante un descanzo en el viaje ")
     public ResponseEntity<?> setExtraRate(@PathVariable long price){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(ScooterService.setextraRate(price));
@@ -139,7 +154,8 @@ public class ScooterController {
     }
 
     @GetMapping("/normalRate/")
-    public ResponseEntity<?> setNormalRate(){
+    @Operation(summary = "Obtener el precio normal del scooter")
+    public ResponseEntity<?> getNormalRate(){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(ScooterService.getNormalRate());
         } catch (Exception e) {
@@ -148,7 +164,8 @@ public class ScooterController {
     }
 
     @GetMapping("/extraRate/")
-    public ResponseEntity<?> setExtraRate(){
+    @Operation(summary = "Obtener el precio extra del scooter")
+    public ResponseEntity<?> getExtraRate(){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(ScooterService.getextraRate());
         } catch (Exception e) {

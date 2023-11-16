@@ -87,14 +87,10 @@ public class ScooterService implements BaseService<Scooter>{
         }
     }
 
+
     public List<ScooterDto> reportStopYes() throws Exception {
         try {
-            var result = this.scooterRepository.reportWithStop();
-            return result.stream().map(Scooter -> new ScooterDto(
-                    Scooter.getActiveTime(),
-                    Scooter.getOffTime(),
-                    Scooter.getKilometres(),
-                    Scooter.isStatus())).collect(Collectors.toList());
+            return this.scooterRepository.reportWithStop();
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
@@ -102,25 +98,18 @@ public class ScooterService implements BaseService<Scooter>{
 
     public List<ScooterDto> reportStopNo() throws Exception {
         try {
-            var result = this.scooterRepository.reportWithNoStop();
-            return result.stream().map(Scooter -> new ScooterDto(
-                    Scooter.getActiveTime(),
-                    Scooter.getOffTime(),
-                    Scooter.getKilometres(),
-                    Scooter.isStatus())).collect(Collectors.toList());
+            var scooterDtos = this.scooterRepository.reportWithNoStop();
+            System.out.println(scooterDtos);
+            return scooterDtos;
         }catch (Exception e){
+            System.out.println(e);
             throw new Exception(e.getMessage());
         }
     }
 
     public List<ScooterDto> reportXTrips(int lot, int year) throws Exception {
         try {
-            var result = this.scooterRepository.reportXTrips(lot, year);
-            return result.stream().map(Scooter -> new ScooterDto(
-                    Scooter.getActiveTime(),
-                    Scooter.getOffTime(),
-                    Scooter.getKilometres(),
-                    Scooter.isStatus())).collect(Collectors.toList());
+            return this.scooterRepository.reportXTrips(lot, year);
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
@@ -131,7 +120,6 @@ public class ScooterService implements BaseService<Scooter>{
             var result = this.scooterRepository.near(location);
             return result.stream().map(Scooter -> new ScooterDto(
                     Scooter.getLocation(),
-                    Scooter.getKilometres(),
                     Scooter.isStatus())).collect(Collectors.toList());
         }catch (Exception e){
             throw new Exception(e.getMessage());

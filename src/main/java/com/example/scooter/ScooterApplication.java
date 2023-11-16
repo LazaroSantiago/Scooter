@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import util.Test;
+import util.cargaData;
 
 
 @SpringBootApplication
@@ -21,10 +21,10 @@ public class ScooterApplication {
     }
 
     @Autowired
-    private Test test;
+    private cargaData cargaData;
 
     @PostConstruct
     public void init() {
-        test.testScooter();
+//        cargaData.carga();
     }
 }

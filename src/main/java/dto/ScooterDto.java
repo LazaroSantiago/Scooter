@@ -3,14 +3,15 @@ package dto;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Data
 public class ScooterDto implements Serializable {
 
-    private Timestamp activeTime;
+    private BigDecimal activeTime;
 
-    private Timestamp offTime;
+    private BigDecimal offTime;
 
     private long kilometres;
 
@@ -18,25 +19,26 @@ public class ScooterDto implements Serializable {
 
     private String location;
 
+    private long trips;
+
     private long activeScooters;
     private long nonActiveScooters;
 
-    public ScooterDto (Timestamp activeTime, long kilometres, boolean status){
-        this.activeTime = activeTime;
+    public ScooterDto (long trips, long kilometres, boolean status){
+        this.trips = trips;
         this.kilometres = kilometres;
         this.status = status;
     }
 
-    public ScooterDto (Timestamp activeTime, Timestamp offTime, long kilometres, boolean status){
+    public ScooterDto (BigDecimal activeTime, BigDecimal offTime, long kilometres, boolean status){
         this.activeTime = activeTime;
         this.kilometres = kilometres;
         this.offTime = offTime;
         this.status = status;
     }
 
-    public ScooterDto (String location, long kilometres, boolean status){
+    public ScooterDto (String location, boolean status){
         this.location = location;
-        this.kilometres = kilometres;
         this.status = status;
     }
 

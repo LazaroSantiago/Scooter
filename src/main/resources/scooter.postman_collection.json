@@ -1,0 +1,483 @@
+{
+	"info": {
+		"_postman_id": "356007fc-8c35-48af-9a90-f892875553d3",
+		"name": "scooter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18170435"
+	},
+	"item": [
+		{
+			"name": "scooter",
+			"item": [
+				{
+					"name": "findAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/scooter",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"scooter"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 15,\r\n  \"normalRate\": 100,\r\n  \"extraRate\": 150,\r\n  \"status\": true,\r\n  \"location\": \"tandil\",\r\n  \"stop\": {\r\n    \"id\": 3\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/scooter",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"scooter"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/scooter/15",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"scooter",
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/scooter/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"scooter",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inMaintenance",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/scooter/inMaintenance/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"scooter",
+								"inMaintenance",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "outMaintenance",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/scooter/outMaintenance/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"scooter",
+								"outMaintenance",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reporte sin paradas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/scooter/report/stopNo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"scooter",
+								"report",
+								"stopNo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "activated scooters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/scooter/report/activated",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"scooter",
+								"report",
+								"activated"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reporte con paradas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/scooter/report/stopYes",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"scooter",
+								"report",
+								"stopYes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "X viajes en año",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/scooter/report/0/1970",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"scooter",
+								"report",
+								"0",
+								"1970"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ubicacion scooter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/scooter/location/tandil",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"scooter",
+								"location",
+								"tandil"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get normalRate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/scooter/normalRate/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"scooter",
+								"normalRate",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set normalRate",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/scooter/normalRate/100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"scooter",
+								"normalRate",
+								"100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get extraRate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/scooter/extraRate/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"scooter",
+								"extraRate",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set extraRate",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/scooter/extraRate/1000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"scooter",
+								"extraRate",
+								"1000"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "trip",
+			"item": [
+				{
+					"name": "save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 50,\r\n  \"idScooter\": 1,\r\n  \"idUser\": 2,\r\n  \"idStartStop\": 1,\r\n  \"kilometres\": 50,\r\n  \"startTime\": \"2023-01-01T08:00:00\",\r\n  \"endTime\": \"2023-01-01T10:00:00\",\r\n  \"price\": 25,\r\n  \"offTime\": \"2023-01-01T09:30:00\",\r\n  \"idEndStop\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/trip",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"trip"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/trip/50",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"trip",
+								"50"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "total recaudado  1/12/1970",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/trip/1/12/1970",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"trip",
+								"1",
+								"12",
+								"1970"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "set precio viaje",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/trip/1/10000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"trip",
+								"1",
+								"10000"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Scooter Stop",
+			"item": [
+				{
+					"name": "save",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 7,\r\n  \"location\": \"Nombre de la Ubicación\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8082/ScooterStop",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"ScooterStop"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8082/ScooterStop/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8082",
+							"path": [
+								"ScooterStop",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

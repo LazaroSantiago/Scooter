@@ -1,6 +1,7 @@
 package controller;
 
 import entity.Trip;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ public class TripController {
     private TripService tripService;
 
     @PostMapping("")
+    @Operation(summary = "Crea un nuevo viaje")
     public ResponseEntity<?> save(@RequestBody Trip entity){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(this.tripService.save(entity));
@@ -25,8 +27,9 @@ public class TripController {
         }
     }
 
-    @DeleteMapping("")
-    public ResponseEntity<?> delete(@RequestBody long id){
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Elimina un viaje por id")
+    public ResponseEntity<?> delete(@PathVariable long id){
         try {
             return ResponseEntity.status(HttpStatus.OK).body(this.tripService.delete(id));
         }catch (Exception e){

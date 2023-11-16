@@ -1,6 +1,7 @@
 package controller;
 
 import entity.ScooterStop;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ public class ScooterStopController {
     private ScooterStopService SStopService;
 
     @PostMapping("")
+    @Operation(summary = "Crea una nueva parada de scooters")
     public ResponseEntity<?> save(@RequestBody ScooterStop entity) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(SStopService.save(entity));
@@ -25,10 +27,11 @@ public class ScooterStopController {
         }
     }
 
-    @DeleteMapping("")
-    public ResponseEntity<?> delete(@RequestBody ScooterStop entity) {
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Elimina una parada de scooters")
+    public ResponseEntity<?> delete(@PathVariable long id) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(SStopService.save(entity));
+            return ResponseEntity.status(HttpStatus.OK).body(SStopService.delete(id));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"error\":\"Error. Por favor intente más tarde.\"}");
         }

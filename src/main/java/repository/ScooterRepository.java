@@ -34,15 +34,22 @@ public interface ScooterRepository extends BaseRepository<Scooter, Long>{
 
 //    Generar reporte de uso de monopatines por tiempo con pausas
     @Query(
-            "select s from Scooter s inner join Trip t on s.id = t.idScooter where UNIX_TIMESTAMP(t.offTime) > 0 order by t.offTime desc"
+            "select new dto.ScooterDto(sum(UNIX_TIMESTAMP(t.startTime)), sum(UNIX_TIMESTAMP(t.offTime)), sum(t.kilometres), s.status) " +
+                    " from Scooter s inner join Trip t on s.id = t.idScooter " +
+                    " group by s.id " +
+                    " having sum(unix_timestamp(t.offTime)) > 0 " +
+                    "order by sum(unix_timestamp(t.offTime)) desc"
     )
-    List<Scooter> reportWithStop();
+    List<ScooterDto> reportWithStop();
 
 //    Generar reporte de uso de monopatines por tiempo sin pausas
     @Query(
-            "select s from Scooter s inner join Trip t on s.id = t.idScooter where UNIX_TIMESTAMP(t.offTime) = 0"
+            "select new dto.ScooterDto(sum(UNIX_TIMESTAMP(t.startTime)), sum(UNIX_TIMESTAMP(t.offTime)), sum(t.kilometres), s.status) " +
+                    " from Scooter s inner join Trip t on s.id = t.idScooter " +
+                    " group by s.id " +
+                    " having sum(unix_timestamp(t.offTime)) = 0 "
     )
-    List<Scooter> reportWithNoStop();
+    List<ScooterDto> reportWithNoStop();
 
 //    Como administrador quiero consultar la cantidad de monopatines actualmente en operación,
 //    versus la cantidad de monopatines actualmente en mantenimiento.
@@ -54,17 +61,19 @@ public interface ScooterRepository extends BaseRepository<Scooter, Long>{
 
     //    Como administrador quiero consultar los monopatines con más de X viajes en un cierto año.
     @Query(
-            "select s from  Scooter s " +
-                    "where :lot < (select count(*) from Trip t where t.id = s.id " +
-                    "and extract(year from t.startTime) = :year group by  t.id)"
+            "select new dto.ScooterDto(count(t.id), count(t.kilometres), s.status)  " +
+                    " from Scooter s inner join Trip t on s.id = t.idScooter " +
+                    " where extract(year from t.startTime) = :year " +
+                    " group by s.id " +
+                    " having count(t.id) > :lot "
     )
-    List<Scooter> reportXTrips(@Param("lot") int lot, @Param("year") int year);
+    List<ScooterDto> reportXTrips(@Param("lot") int lot, @Param("year") int year);
 
     //    Como usuario quiero lun listado de los monopatines cercanos a mi zona,
 //    para poder encontrar un monopatín cerca de mi ubicación
     @Query(
             "select s " +
-                    "from Scooter s inner join ScooterStop ss on s.stop.stop_id = ss.stop_id" +
+                    "from Scooter s inner join ScooterStop ss on s.stop.id = ss.id" +
                     " where ss.location like :location and s.status = TRUE "
     )
     List<Scooter> near(@Param("location") String location);
