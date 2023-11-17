@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 @Data
 public class ScooterDto implements Serializable {
 
-    private BigDecimal activeTime;
+    private long id;
 
     private BigDecimal offTime;
 
@@ -19,31 +19,17 @@ public class ScooterDto implements Serializable {
 
     private String location;
 
-    private long trips;
-
-    private long activeScooters;
-    private long nonActiveScooters;
-
-    public ScooterDto (long trips, long kilometres, boolean status){
-        this.trips = trips;
-        this.kilometres = kilometres;
-        this.status = status;
-    }
-
-    public ScooterDto (BigDecimal activeTime, BigDecimal offTime, long kilometres, boolean status){
-        this.activeTime = activeTime;
-        this.kilometres = kilometres;
+    public ScooterDto(long id, BigDecimal offTime, long kilometres, boolean status, String location) {
+        this.id = id;
         this.offTime = offTime;
+        this.kilometres = kilometres;
         this.status = status;
-    }
-
-    public ScooterDto (String location, boolean status){
         this.location = location;
-        this.status = status;
     }
 
-    public ScooterDto (long activeScooters, long nonActiveScooters){
-        this.activeScooters = activeScooters;
-        this.nonActiveScooters = nonActiveScooters;
+    public ScooterDto (long id){
+        this.id = id;
     }
+
+
 }

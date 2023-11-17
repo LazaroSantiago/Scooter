@@ -1,5 +1,6 @@
 package service;
 
+import dto.CantidadDeScooters;
 import dto.ScooterDto;
 import dto.ScooterStopDto;
 import entity.Scooter;
@@ -119,14 +120,13 @@ public class ScooterService implements BaseService<Scooter>{
         try {
             var result = this.scooterRepository.near(location);
             return result.stream().map(Scooter -> new ScooterDto(
-                    Scooter.getLocation(),
-                    Scooter.isStatus())).collect(Collectors.toList());
+                    Scooter.getId())).collect(Collectors.toList());
         }catch (Exception e){
             throw new Exception(e.getMessage());
         }
     }
 
-    public List<ScooterDto> reportFunctionalScooter() throws Exception {
+    public CantidadDeScooters reportFunctionalScooter() throws Exception {
         try {
             return this.scooterRepository.functionalScooter();
         }catch (Exception e){

@@ -1,5 +1,6 @@
 package repository;
 
+import dto.CantidadDeScooters;
 import dto.ScooterDto;
 import dto.ScooterStopDto;
 import entity.Scooter;
@@ -34,7 +35,7 @@ public interface ScooterRepository extends BaseRepository<Scooter, Long>{
 
 //    Generar reporte de uso de monopatines por tiempo con pausas
     @Query(
-            "select new dto.ScooterDto(sum(UNIX_TIMESTAMP(t.startTime)), sum(UNIX_TIMESTAMP(t.offTime)), sum(t.kilometres), s.status) " +
+            "select new dto.ScooterDto(s.id, sum(UNIX_TIMESTAMP(t.offTime)), count(t.kilometres), s.status, s.location) " +
                     " from Scooter s inner join Trip t on s.id = t.idScooter " +
                     " group by s.id " +
                     " having sum(unix_timestamp(t.offTime)) > 0 " +
@@ -44,7 +45,7 @@ public interface ScooterRepository extends BaseRepository<Scooter, Long>{
 
 //    Generar reporte de uso de monopatines por tiempo sin pausas
     @Query(
-            "select new dto.ScooterDto(sum(UNIX_TIMESTAMP(t.startTime)), sum(UNIX_TIMESTAMP(t.offTime)), sum(t.kilometres), s.status) " +
+            "select new dto.ScooterDto(s.id, sum(UNIX_TIMESTAMP(t.offTime)), count(t.kilometres), s.status, s.location) " +
                     " from Scooter s inner join Trip t on s.id = t.idScooter " +
                     " group by s.id " +
                     " having sum(unix_timestamp(t.offTime)) = 0 "
@@ -54,14 +55,14 @@ public interface ScooterRepository extends BaseRepository<Scooter, Long>{
 //    Como administrador quiero consultar la cantidad de monopatines actualmente en operación,
 //    versus la cantidad de monopatines actualmente en mantenimiento.
     @Query(
-            "select new dto.ScooterDto(SUM(CASE WHEN s.status = true THEN 1 ELSE 0 END),  SUM(CASE WHEN s.status = false THEN 1 ELSE 0 END)) " +
+            "select new dto.CantidadDeScooters(SUM(CASE WHEN s.status = true THEN 1 ELSE 0 END),  SUM(CASE WHEN s.status = false THEN 1 ELSE 0 END)) " +
                     "from Scooter s"
     )
-    List<ScooterDto> functionalScooter();
+    CantidadDeScooters functionalScooter();
 
     //    Como administrador quiero consultar los monopatines con más de X viajes en un cierto año.
     @Query(
-            "select new dto.ScooterDto(count(t.id), count(t.kilometres), s.status)  " +
+            "select new dto.ScooterDto(s.id, sum(UNIX_TIMESTAMP(t.offTime)), count(t.kilometres), s.status, s.location)  " +
                     " from Scooter s inner join Trip t on s.id = t.idScooter " +
                     " where extract(year from t.startTime) = :year " +
                     " group by s.id " +
